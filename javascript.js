@@ -1,4 +1,6 @@
-populateGrid(100);
+
+
+populateGrid(10);
 
 
 // size is the number of rows & columns e.g. '25' == 25x25

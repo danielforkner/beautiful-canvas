@@ -1,6 +1,11 @@
 :root {
+    --topHeight: 150px;
     --gridSize: 750px;
     --borderWidth: 50px;
+    --controlsGap: -100px;
+    --controlsWidth: 75px;
+    --navItemSize: 3em;
+    --selectedColor: blue;
 }
 
 body {
@@ -13,78 +18,71 @@ body {
     padding: 0;
 }
 
+.top {
+    height: var(--topHeight);
+}
+
 h1 {
     color: hotpink;
 }
 
 .main {
-    /* border: 1px solid red;  */
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%)
 }
 
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    width: var(--controlsWidth);
+    height: 100%;
+    left: var(--controlsGap);
+}
+
+.navItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    box-shadow: 5px 5px 1px;
+    font-size: var(--navItemSize);
+    width: 100%;
+    height: var(--controlsWidth);
+}
+
+.color {
+    box-shadow: 5px 5px 1px var(--selectedColor);
+}
+
 .grid {
     display: grid;
-
     border: 1px solid black;
-
+    box-shadow: 5px 5px 1px;
     height: var(--gridSize);
     width: var(--gridSize);
-
     grid-template-columns: repeat(25, 1fr);
     grid-template-rows: repeat(25, 1fr);
 }
 
 .pixel {
-
+    border: 1px solid blue;
 }
 
 
-/* Final feature: "save" function will convert grid to a jpeg and display it along the border
-.topBorder {
-    border: 1px solid green;
 
-    position: absolute;
-    top: calc(var(--borderWidth) * -1);
-    left: calc(var(--borderWidth) * -1);
-    height: var(--borderWidth);
-    width: calc(var(--gridSize) + var(--borderWidth) + var(--borderWidth));
-
-    display: flex;
-}
-.rightBorder {
-    border: 1px solid green;
-
-    position: absolute;
-    right: calc(var(--borderWidth) * -1);
-    height: var(--gridSize);
-    width: var(--borderWidth);
-
-    display: flex;
-    flex-direction: column;
-}
 .bottomBorder {
-    border: 1px solid green;
-
     position: absolute;
     bottom: calc(var(--borderWidth) * -1);
-    left: calc(var(--borderWidth) * -1);
     height: var(--borderWidth);
-    width: calc(var(--gridSize) + var(--borderWidth) + var(--borderWidth));
+    width: var(--gridSize);
 
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
-.leftBorder {
-    border: 1px solid green;
-
-    position: absolute;
-    left: calc(var(--borderWidth) * -1);
-    height: var(--gridSize);
-    width: var(--borderWidth);
-
-    display: flex;
-    flex-direction: column;
-} */
