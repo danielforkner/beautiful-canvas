@@ -1,11 +1,13 @@
 :root {
     --topHeight: 150px;
     --gridSize: 750px;
-    --borderWidth: 50px;
+    --footerWidth: 50px;
+    --sliderWidth: 150px;
     --controlsGap: -100px;
     --controlsWidth: 75px;
     --navItemSize: 3em;
     --selectedColor: blue;
+    --transitionSpeed: 0.5s;
 }
 
 body {
@@ -50,14 +52,15 @@ h1 {
     justify-content: center;
     align-items: center;
     color: black;
+    border: 2px solid var(--selectedColor);
     box-shadow: 5px 5px 1px;
     font-size: var(--navItemSize);
     width: 100%;
     height: var(--controlsWidth);
 }
 
-.color {
-    box-shadow: 5px 5px 1px var(--selectedColor);
+.disabled {
+    display: none;
 }
 
 .grid {
@@ -74,15 +77,25 @@ h1 {
     border: 1px solid blue;
 }
 
-
-
 .bottomBorder {
     position: absolute;
-    bottom: calc(var(--borderWidth) * -1);
-    height: var(--borderWidth);
+    bottom: calc(var(--footerWidth) * -1);
+    height: var(--footerWidth);
     width: var(--gridSize);
 
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.sliderContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: calc(var(--sliderWidth) * -1);
+    height: var(--gridSize);
+    width: var(--sliderWidth);
+    transition: 2s ease;
 }
