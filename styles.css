@@ -2,9 +2,11 @@
     --topHeight: 150px;
     --gridSize: 750px;
     --footerWidth: 50px;
+    --footerOffset: 50px;
     --sliderWidth: 150px;
-    --controlsGap: -100px;
-    --controlsWidth: 75px;
+    --navOffset: -100px;
+    --navWidth: 75px;
+    --navHeight: 100%;
     --navItemSize: 3em;
     --navOptionSize: 1em;
     --selectedColor: hsl(241, 100%, 50%);
@@ -17,12 +19,13 @@
     --shadowHue: black;
     --titleSize: 4em;
     --themeFont: sans-serif;
+    --navFlexDirection: column;
 }
 
 @media screen and (max-width: 1200px) {
     :root {
         --gridSize: 500px;
-        --controlsWidth: 50px;
+        --navWidth: 50px;
         --navItemSize: 2em;
         --navOptionSize: 0.95em;
     }
@@ -30,6 +33,20 @@
 @media screen and (max-width: 1000px) {
     :root {
         --gridSize: 450px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    /* I tried adjusting some .nav properties directly with no effect? */
+    :root {
+        --navWidth: 100%;
+        --navFlexDirection: row;
+        --navOffset: 0;
+        --navHeight: 50px;
+        --footerOffset: 120px;
+    }
+    .nav {
+        bottom: -65px;
     }
 }
 
@@ -74,14 +91,14 @@ h1 {
 
 .nav {
     display: flex;
-    flex-direction: column;
+    flex-direction: var(--navFlexDirection);
     justify-content: center;
     align-items: center;
     gap: 20px;
     position: absolute;
-    width: var(--controlsWidth);
-    height: 100%;
-    left: var(--controlsGap);
+    width: var(--navWidth);
+    height: var(--navHeight);
+    left: var(--navOffset);
 }
 
 .navBtn {
@@ -93,7 +110,7 @@ h1 {
     box-shadow: 5px 5px var(--shadowSize) var(--shadowHue);
     font-size: var(--navItemSize);
     width: 100%;
-    height: var(--controlsWidth);
+    height: var(--navWidth);
 }
 
 .gridOptions, .paintOptions {
@@ -161,7 +178,7 @@ h1 {
 
 .bottomBorder {
     position: absolute;
-    bottom: calc(var(--footerWidth) * -1);
+    bottom: calc(var(--footerOffset) * -1);
     height: var(--footerWidth);
     width: var(--gridSize);
     color: var(--oppositeTheme);
