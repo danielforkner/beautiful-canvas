@@ -6,7 +6,6 @@ Use your mouse to color your imagination!
 - Color picker button changes your selected color
 - Piant bruch button allows you to enable light show mode
 
-icons by [font awesome](https://fontawesome.com/)
-color picker by [iro.js](https://iro.js.org/)
-
 [Live Demo](https://danielforkner.github.io/beautiful-canvas/)
+
+icons by [font awesome](https://fontawesome.com/) && color picker by [iro.js](https://iro.js.org/)
