@@ -1,13 +1,74 @@
-
-
-populateGrid(10);
+populateGrid(25);
 
 // nav buttons
 let colorBtn = document.querySelector('.colorBtn');
+let gridBtn = document.querySelector('.gridBtn');
+let paintBtn = document.querySelector('.paintBtn');
+let themeBtn = document.querySelector('.themeBtn');
 
-colorBtn.addEventListener("click", function() {
-    document.querySelector('#colorSlider').classList.toggle('disabled');
-})
+
+colorBtn.addEventListener("click", toggleColor);
+gridBtn.addEventListener("click", toggleGrid);
+paintBtn.addEventListener("click", togglePaint);
+themeBtn.addEventListener("click", toggleTheme);
+
+// open the nav item selected, and close all others
+function toggleColor() {
+    document.querySelector('#colorOptions').classList.toggle('disabled');
+    document.querySelector('.gridOptions').classList.add('disabled');
+    document.querySelector('.paintOptions').classList.add('disabled');
+}
+function toggleGrid() {
+    document.querySelector('#colorOptions').classList.add('disabled');
+    document.querySelector('.gridOptions').classList.toggle('disabled');
+    document.querySelector('.paintOptions').classList.add('disabled');
+}
+function togglePaint() {
+    document.querySelector('#colorOptions').classList.add('disabled');
+    document.querySelector('.gridOptions').classList.add('disabled');
+    document.querySelector('.paintOptions').classList.toggle('disabled');
+}
+function toggleTheme() {
+    let themeBtn = document.querySelector('.themeBtn');
+    if (themeBtn.classList.contains('lightTheme')) {
+        themeBtn.classList.remove('lightTheme');
+        themeBtn.classList.add('darkTheme');
+        themeBtn.innerHTML = '<i class="far fa-lightbulb"></i>';
+        document.documentElement.style.setProperty('--themeColor', 'black');
+        document.documentElement.style.setProperty('--oppositeTheme', 'white');
+        document.documentElement.style.setProperty('--shadowSize', '12px');
+        document.documentElement.style.setProperty('--themeHover', 'purple');
+        document.documentElement.style.setProperty('--shadowHue', '#39FF14');
+        document.documentElement.style.setProperty('--themeFont', "'Sedgwick Ave', sans-serif");
+        document.querySelector('.darkTitle').classList.toggle('alive');
+        document.querySelector('.darkTitle').classList.toggle('disabled');
+        document.querySelector('title').innerText = 'DARK CANVAS';
+    } else {
+        themeBtn.classList.remove('darkTheme');
+        themeBtn.classList.add('lightTheme');
+        themeBtn.innerHTML = '<i class="fas fa-lightbulb"></i>';
+        document.documentElement.style.setProperty('--themeColor', 'white');
+        document.documentElement.style.setProperty('--oppositeTheme', 'black');
+        document.documentElement.style.setProperty('--shadowSize', '1px');
+        document.documentElement.style.setProperty('--themeHover', 'yellow');
+        document.documentElement.style.setProperty('--shadowHue', 'black');
+        document.documentElement.style.setProperty('--themeFont', 'sans-serif');
+        document.querySelector('.darkTitle').classList.toggle('alive');
+        document.querySelector('.darkTitle').classList.toggle('disabled');
+        document.querySelector('title').innerText = 'Beautiful Canvas';
+    }
+}
+
+// grid options
+// let smBtn = document.querySelector('.small');
+// let mdSmBtn = document.querySelector('.medium-small');
+// let mdLrgBtn = document.querySelector('.medium-large');
+// let lrgBtn = document.querySelector('.large');
+
+// smBtn.addEventListener("click", populateGrid(16));
+// mdSmBtn.addEventListener("click", populateGrid(32));
+// mdLrgBtn.addEventListener("click", populateGrid(64));
+// lrgBtn.addEventListener("click", populateGrid(100));
 
 
 // size is the number of rows & columns e.g. '25' == 25x25
@@ -33,7 +94,7 @@ function populateGrid(size) {
 }
 
 // color picker nav item
-let colorPicker = new iro.ColorPicker('#colorSlider', {
+let colorPicker = new iro.ColorPicker('#colorOptions', {
     color: "rgb(255, 0, 0)",
     borderWidth: 1,
     borderColor: "#fff",

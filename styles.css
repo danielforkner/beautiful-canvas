@@ -8,20 +8,40 @@
     --navItemSize: 3em;
     --selectedColor: blue;
     --transitionSpeed: 0.5s;
+    --themeColor: white;
+    --oppositeTheme: black;
+    --themeHover: yellow;
+    --shadowSize: 1px;
+    --shadowHue: black;
+    --fontSize: 4em;
+    --themeFont: sans-serif;
 }
 
 body {
+    font-family: var(--themeFont);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     margin: 0;
     padding: 0;
+    background-color: var(--themeColor);
 }
 
-.top {
-    height: var(--topHeight);
+/* dark title */
+.darkTitle {
+    background: -webkit-linear-gradient(to left, #39FF14, purple);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #39FF14, purple); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.alive {
+    color: white;
+    animation-name: blink;
+    animation-duration: 4s;
 }
 
 h1 {
@@ -47,48 +67,43 @@ h1 {
     left: var(--controlsGap);
 }
 
-.navItem {
+.navBtn {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: var(--oppositeTheme);
     border: 2px solid var(--selectedColor);
-    box-shadow: 5px 5px 1px;
+    box-shadow: 5px 5px var(--shadowSize) var(--shadowHue);
     font-size: var(--navItemSize);
     width: 100%;
     height: var(--controlsWidth);
 }
 
-.disabled {
-    display: none;
-}
-
-.grid {
-    display: grid;
-    border: 1px solid black;
-    box-shadow: 5px 5px 1px;
-    height: var(--gridSize);
-    width: var(--gridSize);
-    grid-template-columns: repeat(25, 1fr);
-    grid-template-rows: repeat(25, 1fr);
-}
-
-.pixel {
-    border: 1px solid blue;
-}
-
-.bottomBorder {
-    position: absolute;
-    bottom: calc(var(--footerWidth) * -1);
-    height: var(--footerWidth);
-    width: var(--gridSize);
-
+.gridOptions, .paintOptions {
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
-.sliderContainer {
+.option {
+    color: var(--oppositeTheme);
+    display: block;
+    text-align: center;
+    border: 2px solid var(--selectedColor);
+    box-shadow: 5px 5px var(--shadowSize) var(--shadowHue);
+    padding: 5px;
+}
+
+.btn {transition: .15s ease;}
+.btn:hover {
+    background-color: var(--themeHover);
+    transition: .15s ease;
+}
+
+.navSubMenu {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -98,4 +113,83 @@ h1 {
     height: var(--gridSize);
     width: var(--sliderWidth);
     transition: 2s ease;
+}
+
+.disabled {
+    display: none;
+}
+
+.grid {
+    display: grid;
+    border: 2px solid var(--selectedColor);
+    box-shadow: 5px 5px var(--shadowSize) var(--shadowHue);
+    height: var(--gridSize);
+    width: var(--gridSize);
+    grid-template-columns: repeat(25, 1fr);
+    grid-template-rows: repeat(25, 1fr);
+}
+
+.pixel {
+    /* border: 1px solid blue; */
+}
+
+.bottomBorder {
+    position: absolute;
+    bottom: calc(var(--footerWidth) * -1);
+    height: var(--footerWidth);
+    width: var(--gridSize);
+    color: var(--oppositeTheme);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.topBorder {
+    position: absolute;
+    top: calc(var(--footerWidth) * -1);
+    height: var(--footerWidth);
+    width: var(--gridSize);
+    font-size: var(--fontSize);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    5% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    15% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0;
+    }
+    95% {
+        opacity: 1;
+    }
 }
