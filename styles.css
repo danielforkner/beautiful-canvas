@@ -11,6 +11,7 @@
     --transitionSpeed: 0.5s;
     --themeColor: white;
     --oppositeTheme: black;
+    --oppositeSpotlight: rgba(0,0,0,0.5);
     --themeHover: yellow;
     --shadowSize: 1px;
     --shadowHue: black;
@@ -113,6 +114,7 @@ h1 {
     border: 2px solid var(--selectedColor);
     box-shadow: 5px 5px var(--shadowSize) var(--shadowHue);
     padding: 5px;
+    background-color: var(--themeColor);
 }
 
 .btn {transition: .15s ease;}
@@ -122,7 +124,7 @@ h1 {
 }
 
 .navSubMenu {
-    border: 1px solid red;
+    background-image: linear-gradient(to right, var(--oppositeSpotlight), rgba(0,0,0,0) 95%);
     position: fixed;
     display: flex;
     flex-direction: column;

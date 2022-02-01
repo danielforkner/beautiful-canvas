@@ -14,19 +14,22 @@ themeBtn.addEventListener("click", toggleTheme);
 
 // open the nav item selected, and close all others
 function toggleColor() {
-    document.querySelector('#colorOptions').classList.toggle('disabled');
+    document.querySelector('.navSubMenu').classList.toggle('disabled');
+    document.querySelector('#colorOptions').classList.remove('disabled');
     document.querySelector('.gridOptions').classList.add('disabled');
     document.querySelector('.paintOptions').classList.add('disabled');
 }
 function toggleGrid() {
+    document.querySelector('.navSubMenu').classList.toggle('disabled');
     document.querySelector('#colorOptions').classList.add('disabled');
-    document.querySelector('.gridOptions').classList.toggle('disabled');
+    document.querySelector('.gridOptions').classList.remove('disabled');
     document.querySelector('.paintOptions').classList.add('disabled');
 }
 function togglePaint() {
+    document.querySelector('.navSubMenu').classList.toggle('disabled');
     document.querySelector('#colorOptions').classList.add('disabled');
     document.querySelector('.gridOptions').classList.add('disabled');
-    document.querySelector('.paintOptions').classList.toggle('disabled');
+    document.querySelector('.paintOptions').classList.remove('disabled');
 }
 function toggleTheme() {
     let themeBtn = document.querySelector('.themeBtn');
@@ -40,6 +43,7 @@ function toggleTheme() {
         document.documentElement.style.setProperty('--themeHover', 'purple');
         document.documentElement.style.setProperty('--shadowHue', '#39FF14');
         document.documentElement.style.setProperty('--themeFont', "'Sedgwick Ave', sans-serif");
+        document.documentElement.style.setProperty('--oppositeSpotlight', 'rgba(255,255,255,0.5)');
         document.querySelector('.darkTitle').classList.toggle('alive');
         document.querySelector('.darkTitle').classList.toggle('disabled');
         document.querySelector('title').innerText = 'DARK CANVAS';
@@ -53,6 +57,7 @@ function toggleTheme() {
         document.documentElement.style.setProperty('--themeHover', 'yellow');
         document.documentElement.style.setProperty('--shadowHue', 'black');
         document.documentElement.style.setProperty('--themeFont', 'sans-serif');
+        document.documentElement.style.setProperty('--oppositeSpotlight', 'rgba(0,0,0,0.5)');
         document.querySelector('.darkTitle').classList.toggle('alive');
         document.querySelector('.darkTitle').classList.toggle('disabled');
         document.querySelector('title').innerText = 'Beautiful Canvas';
@@ -67,19 +72,48 @@ let lrgBtn = document.querySelector('.large');
 
 smBtn.addEventListener("click", () => {
     populateGrid(16);
+    closeMenu();
 });
 mdSmBtn.addEventListener("click", () => {
     populateGrid(32);
+    closeMenu();
 });
 mdLrgBtn.addEventListener("click", () => {
     populateGrid(64);
+    closeMenu();
 });
 lrgBtn.addEventListener("click", () => {
     populateGrid(100);
+    closeMenu();
 });
 
+function closeMenu() {
+    let subMenu = document.querySelector('.navSubMenu');
+    setTimeout(() => {
+        subMenu.classList.toggle('disabled');
+    }, 300);
+}
 
 // paint options
+let lightShowBtn = document.querySelector('.lightShowBtn');
+let normalShowBtn = document.querySelector('.normalShowBtn');
+
+lightShowBtn.addEventListener("click", () => {
+    changeClass('lightShow', 'normal');
+    closeMenu();
+});
+normalShowBtn.addEventListener("click", () => {
+    changeClass('normal', 'lightShow');
+    closeMenu();
+})
+
+function changeClass(add, remove) {
+    let nodesList = document.querySelectorAll('.pixel');
+    nodesList.forEach(function(pixel) {
+        pixel.classList.remove(remove);
+        pixel.classList.add(add);
+    })  
+}
 
 // size is the number of rows & columns e.g. '25' == 25x25
 function populateGrid(size) {
@@ -100,8 +134,8 @@ function populateGrid(size) {
         pixel.addEventListener('mouseenter', function(event) {
             if (event.target.classList.contains('shadeOn')) {
                 
-            } else if (event.target.classList.contains('randomColor')) {
-
+            } else if (event.target.classList.contains('lightShow')) {
+                event.target.style.backgroundColor = randomColor();
             } else {
                 let pickedColor = getComputedStyle(document.documentElement).getPropertyValue('--selectedColor');
                 event.target.style.backgroundColor = pickedColor;
@@ -110,6 +144,14 @@ function populateGrid(size) {
         })
         grid.append(pixel);
     }
+}
+
+function randomColor() {
+    let r, g, b;
+    r = Math.floor(Math.random() * 255)
+    g = Math.floor(Math.random() * 255)
+    b = Math.floor(Math.random() * 255)
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 function removeDivs(container) {
