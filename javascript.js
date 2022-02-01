@@ -1,10 +1,10 @@
 populateGrid(25);
 
 // nav buttons
-let colorBtn = document.querySelector('.colorBtn');
-let gridBtn = document.querySelector('.gridBtn');
-let paintBtn = document.querySelector('.paintBtn');
 let themeBtn = document.querySelector('.themeBtn');
+let gridBtn = document.querySelector('.gridBtn');
+let colorBtn = document.querySelector('.colorBtn');
+let paintBtn = document.querySelector('.paintBtn');
 
 
 colorBtn.addEventListener("click", toggleColor);
@@ -60,16 +60,26 @@ function toggleTheme() {
 }
 
 // grid options
-// let smBtn = document.querySelector('.small');
-// let mdSmBtn = document.querySelector('.medium-small');
-// let mdLrgBtn = document.querySelector('.medium-large');
-// let lrgBtn = document.querySelector('.large');
+let smBtn = document.querySelector('.small');
+let mdSmBtn = document.querySelector('.medium-small');
+let mdLrgBtn = document.querySelector('.medium-large');
+let lrgBtn = document.querySelector('.large');
 
-// smBtn.addEventListener("click", populateGrid(16));
-// mdSmBtn.addEventListener("click", populateGrid(32));
-// mdLrgBtn.addEventListener("click", populateGrid(64));
-// lrgBtn.addEventListener("click", populateGrid(100));
+smBtn.addEventListener("click", () => {
+    populateGrid(16);
+});
+mdSmBtn.addEventListener("click", () => {
+    populateGrid(32);
+});
+mdLrgBtn.addEventListener("click", () => {
+    populateGrid(64);
+});
+lrgBtn.addEventListener("click", () => {
+    populateGrid(100);
+});
 
+
+// paint options
 
 // size is the number of rows & columns e.g. '25' == 25x25
 function populateGrid(size) {
@@ -79,6 +89,8 @@ function populateGrid(size) {
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
+    removeDivs('.grid');
+
     // loop to create sizeXsize pixels
     let count = size * size;
     for (let i = 0; i < count; i++) {
@@ -86,16 +98,53 @@ function populateGrid(size) {
         pixel.classList.add('pixel');
         // change color when mouse over
         pixel.addEventListener('mouseenter', function(event) {
-            let pickedColor = getComputedStyle(document.documentElement).getPropertyValue('--selectedColor');
-            event.target.style.backgroundColor = pickedColor;
+            if (event.target.classList.contains('shadeOn')) {
+                
+            } else if (event.target.classList.contains('randomColor')) {
+
+            } else {
+                let pickedColor = getComputedStyle(document.documentElement).getPropertyValue('--selectedColor');
+                event.target.style.backgroundColor = pickedColor;
+                console.log(event.target.style.backgroundColor)
+            }            
         })
         grid.append(pixel);
     }
 }
 
+function removeDivs(container) {
+    let parent = document.querySelector(container);
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // color picker nav item
 let colorPicker = new iro.ColorPicker('#colorOptions', {
-    color: "rgb(255, 0, 0)",
+    color: "hsl(241, 100%, 50%)",
     borderWidth: 1,
     borderColor: "#fff",
     layoutDirection: 'horizontal',
@@ -122,5 +171,5 @@ let colorPicker = new iro.ColorPicker('#colorOptions', {
 });
 
 colorPicker.on('color:change', function(color) {
-    document.documentElement.style.setProperty('--selectedColor', color.hexString);
+    document.documentElement.style.setProperty('--selectedColor', color.hslString);
 })

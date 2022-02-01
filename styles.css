@@ -7,7 +7,7 @@
     --controlsWidth: 75px;
     --navItemSize: 3em;
     --navOptionSize: 1em;
-    --selectedColor: blue;
+    --selectedColor: hsl(241, 100%, 50%);
     --transitionSpeed: 0.5s;
     --themeColor: white;
     --oppositeTheme: black;
@@ -122,12 +122,14 @@ h1 {
 }
 
 .navSubMenu {
-    position: absolute;
+    border: 1px solid red;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    left: calc(var(--sliderWidth) * -1);
+    top: 0;
+    left: 0; 
     height: var(--gridSize);
     width: var(--sliderWidth);
     transition: 2s ease;
@@ -147,9 +149,9 @@ h1 {
     grid-template-rows: repeat(25, 1fr);
 }
 
-.pixel {
-    /* border: 1px solid blue; */
-}
+/* .pixel {
+    border: 1px solid blue;
+} */
 
 .bottomBorder {
     position: absolute;
@@ -160,6 +162,10 @@ h1 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+a {
+    text-decoration: none;
 }
 
 .topBorder {
