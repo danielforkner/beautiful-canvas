@@ -6,6 +6,7 @@
     --controlsGap: -100px;
     --controlsWidth: 75px;
     --navItemSize: 3em;
+    --navOptionSize: 1em;
     --selectedColor: blue;
     --transitionSpeed: 0.5s;
     --themeColor: white;
@@ -13,8 +14,22 @@
     --themeHover: yellow;
     --shadowSize: 1px;
     --shadowHue: black;
-    --fontSize: 4em;
+    --titleSize: 4em;
     --themeFont: sans-serif;
+}
+
+@media screen and (max-width: 1200px) {
+    :root {
+        --gridSize: 500px;
+        --controlsWidth: 50px;
+        --navItemSize: 2em;
+        --navOptionSize: 0.95em;
+    }
+}
+@media screen and (max-width: 1000px) {
+    :root {
+        --gridSize: 450px;
+    }
 }
 
 body {
@@ -30,6 +45,7 @@ body {
 
 /* dark title */
 .darkTitle {
+    font-size: var(--titleSize);
     background: -webkit-linear-gradient(to left, #39FF14, purple);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #39FF14, purple); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     -webkit-background-clip: text;
@@ -81,6 +97,7 @@ h1 {
 
 .gridOptions, .paintOptions {
     width: 100%;
+    font-size: var(--navOptionSize);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,6 +107,7 @@ h1 {
 
 .option {
     color: var(--oppositeTheme);
+    font-size: var(--navOptionSize);
     display: block;
     text-align: center;
     border: 2px solid var(--selectedColor);
@@ -149,7 +167,6 @@ h1 {
     top: calc(var(--footerWidth) * -1);
     height: var(--footerWidth);
     width: var(--gridSize);
-    font-size: var(--fontSize);
     display: flex;
     justify-content: center;
     align-items: center;
