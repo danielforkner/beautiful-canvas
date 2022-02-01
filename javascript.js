@@ -95,8 +95,8 @@ function closeMenu() {
 }
 
 // paint options
-let lightShowBtn = document.querySelector('.lightShowBtn');
-let normalShowBtn = document.querySelector('.normalShowBtn');
+let lightShowBtn = document.querySelector('#lightShowBtn');
+let normalShowBtn = document.querySelector('#normalShowBtn');
 
 lightShowBtn.addEventListener("click", () => {
     changeClass('lightShow', 'normal');
